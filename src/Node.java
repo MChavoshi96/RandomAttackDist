@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 
 public class Node {
+    static int numOfSentMessages = 0;
+    static int numOfReceivedMessages = 0;
+    static int numOfLostMessages = 0;
     ArrayList<Integer> val;
     ArrayList<Integer> level;
     int numOfNodes;
@@ -46,6 +49,7 @@ public class Node {
         return id;
     }
     public void send(int destinationID, Message msg){
+        numOfSentMessages ++;
         msg.setSenderID(this.id);
         msg.setReceiverID(destinationID);
         System.out.println(msg.toString());
@@ -54,12 +58,19 @@ public class Node {
      * receives a message in form of (level, value, key)
      */
     public void receive (Message msg){
-        ArrayList<Integer> level = msg.getLevel();
-        ArrayList<Integer> value = msg.getVal();
-        key = (msg.getKey()== -1)? key: msg.getKey();
-        updateLevel(level);
-        updateValue(value);
-        receiveCount ++;
+        int miss = Main.getRandomDecision();
+        if (miss == 0){
+            numOfReceivedMessages ++;
+            ArrayList<Integer> level = msg.getLevel();
+            ArrayList<Integer> value = msg.getVal();
+            key = (msg.getKey()== -1)? key: msg.getKey();
+            updateLevel(level);
+            updateValue(value);
+            receiveCount ++;
+        }else{
+            numOfLostMessages ++;
+            System.out.println("!! Message to Node "+id+" lost!!");
+        }
         if(receiveCount == numOfNodes-1){
             updateMyLevel();
             receiveCount = 0;
@@ -67,9 +78,9 @@ public class Node {
     }
     public void decide (){
         if (key != -1 && level.get(id) >= key && isAllOne(val)){
-            System.out.printf("\nNode %d decision is %d",id,1);
+            System.out.printf("Node %d decision is %d\n",id,1);
         }else
-            System.out.printf("\nNode %d decision is %d",id,0);
+            System.out.printf("Node %d decision is %d\n",id,0);
     }
     private void updateLevel(ArrayList<Integer> recLevel){
         for (int i = 0; i < recLevel.size(); i++) {
@@ -103,5 +114,17 @@ public class Node {
             if (i == 0) return false;
         }
         return true;
+    }
+
+    public static int getNumOfSentMessages() {
+        return numOfSentMessages;
+    }
+
+    public static int getNumOfReceivedMessages() {
+        return numOfReceivedMessages;
+    }
+
+    public static int getNumOfLostMessages() {
+        return numOfLostMessages;
     }
 }

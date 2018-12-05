@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Main {
 
-    final static int numOfNodes = 10;
+    final static int numOfNodes = 3;
 
     public static void main(String[] args){
         int roundCount = 0;
@@ -36,8 +36,12 @@ public class Main {
              nodes) {
             node.decide();
         }
+        System.out.println(Node.getNumOfSentMessages()+" messages sent");
+        System.out.println(Node.getNumOfReceivedMessages()+" messages received");
+        System.out.println(Node.getNumOfLostMessages()+" messages lost");
+        System.out.println(((double) Node.getNumOfLostMessages()/Node.numOfSentMessages)*100+" loss");
     }
-    private static int getRandomDecision(){
+    public static int getRandomDecision(){
         double rand = Math.random();
         if (rand < 0.5) return 0;
         return 1;
