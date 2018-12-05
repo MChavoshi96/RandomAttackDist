@@ -18,8 +18,7 @@ public class Node {
     private void initializeVal(int numOfNodes, int initialValue){
         val = new ArrayList<>(numOfNodes);
         for (int i = 0; i < numOfNodes; i++){
-//            if (i == id)    val.add(i,initialValue);
-            if (i == id)    val.add(i,1);
+            if (i == id)    val.add(i,initialValue);
             else    val.add(i,-1); //-1 means undefined
         }
     }

@@ -48,5 +48,4 @@ public class Main {
             System.out.printf("Node %d : level => %s  val =>  %s\n",node.getId(),node.getLevel(),node.getVal());
         }
     }
-
 }
