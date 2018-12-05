@@ -18,7 +18,8 @@ public class Node {
     private void initializeVal(int numOfNodes, int initialValue){
         val = new ArrayList<>(numOfNodes);
         for (int i = 0; i < numOfNodes; i++){
-            if (i == id)    val.add(i,initialValue);
+//            if (i == id)    val.add(i,initialValue);
+            if (i == id)    val.add(i,1);
             else    val.add(i,-1); //-1 means undefined
         }
     }
@@ -62,6 +63,7 @@ public class Node {
         receiveCount ++;
         if(receiveCount == numOfNodes-1){
             updateMyLevel();
+            receiveCount = 0;
         }
     }
     public void decide (){

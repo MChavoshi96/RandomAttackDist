@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Main {
 
-    final static int numOfNodes = 3;
+    final static int numOfNodes = 10;
 
     public static void main(String[] args){
         int roundCount = 0;
@@ -45,7 +45,7 @@ public class Main {
     private static void printNodes(ArrayList<Node> nodes){
         System.out.println("***Nodes***");
         for (Node node : nodes){
-            System.out.printf("Node %d : val => %s  level is =>  %s\n",node.getId(),node.getVal(),node.getLevel());
+            System.out.printf("Node %d : level => %s  val =>  %s\n",node.getId(),node.getLevel(),node.getVal());
         }
     }
 
