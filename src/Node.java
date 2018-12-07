@@ -15,7 +15,7 @@ public class Node {
         this.id = id;
         this.numOfNodes = numOfNodes;
         this.key = (id == 0) ? (int)(Math.random()*numOfNodes): -1;
-        if (id == 0) System.out.println("Chosen key is "+key);
+ //       if (id == 0) System.out.println("Chosen key is "+key);
         initializeVal(numOfNodes, initialValue);
         initializeLevel(numOfNodes);
     }
@@ -60,7 +60,7 @@ public class Node {
         numOfSentMessages ++;
         msg.setSenderID(this.id);
         msg.setReceiverID(destinationID);
-        System.out.println(msg.toString());
+       // System.out.println(msg.toString());
     }
     /**
      * receives a message in form of (level, value, key)
@@ -77,18 +77,20 @@ public class Node {
             receiveCount ++;
         }else{
             numOfLostMessages ++;
-            System.out.println("!! Message to Node "+id+" lost!!");
+           // System.out.println("!! Message to Node "+id+" lost!!");
         }
         if(receiveCount == numOfNodes-1){
             updateMyLevel();
             receiveCount = 0;
         }
     }
-    public void decide (){
+    public int decide (){
         if (key != -1 && level.get(id) >= key && isAllOne(val)){
-            System.out.printf("Node %d decision is %d\n",id,1);
+           // System.out.printf("Node %d decision is %d\n",id,1);
+            return 1;
         }else
-            System.out.printf("Node %d decision is %d\n",id,0);
+           // System.out.printf("Node %d decision is %d\n",id,0);
+            return 0;
     }
     private void updateLevel(ArrayList<Integer> recLevel){
         for (int i = 0; i < recLevel.size(); i++) {

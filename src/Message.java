@@ -39,7 +39,7 @@ public class Message {
     public String getLevelString() {
         return getVectorString(level);
     }
-    public String getVectorString(ArrayList<Integer> list){
+    public  static String getVectorString(ArrayList<Integer> list){
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         for (Integer v: list) {
