@@ -10,6 +10,7 @@ public class Node {
     int id;
     int key;
     int receiveCount = 0;
+
     public Node(int numOfNodes, int id, int initialValue){
         this.id = id;
         this.numOfNodes = numOfNodes;
@@ -18,6 +19,28 @@ public class Node {
         initializeVal(numOfNodes, initialValue);
         initializeLevel(numOfNodes);
     }
+    public static int getNumOfSentMessages() {
+        return numOfSentMessages;
+    }
+    public static int getNumOfReceivedMessages() {
+        return numOfReceivedMessages;
+    }
+    public static int getNumOfLostMessages() {
+        return numOfLostMessages;
+    }
+    public ArrayList<Integer> getVal() {
+        return val;
+    }
+    public ArrayList<Integer> getLevel() {
+        return level;
+    }
+    public int getKey() {
+        return key;
+    }
+    public int getId() {
+        return id;
+    }
+
     private void initializeVal(int numOfNodes, int initialValue){
         val = new ArrayList<>(numOfNodes);
         for (int i = 0; i < numOfNodes; i++){
@@ -33,21 +56,6 @@ public class Node {
         }
     }
 
-    public ArrayList<Integer> getVal() {
-        return val;
-    }
-
-    public ArrayList<Integer> getLevel() {
-        return level;
-    }
-
-    public int getKey() {
-        return key;
-    }
-
-    public int getId() {
-        return id;
-    }
     public void send(int destinationID, Message msg){
         numOfSentMessages ++;
         msg.setSenderID(this.id);
@@ -94,19 +102,19 @@ public class Node {
     private void updateMyLevel(){
         level.set(id, getMin(level)+1);
     }
-    private int getMin(ArrayList<Integer> list){
-        int min = list.get(0);
-        for (int i : list){
-            min = min < i ? min : i;
-        }
-        return min;
-    }
     private void updateValue(ArrayList<Integer> recValue){
         //if,  for  some  i',  Vi,(j)  r  undefined  then  val(j)  :=  V/,(j)
         for (int i = 0; i < recValue.size(); i++) {
             int v = recValue.get(i);
             if (v != -1)    val.set(i,v);
         }
+    }
+    private int getMin(ArrayList<Integer> list){
+        int min = list.get(0);
+        for (int i : list){
+            min = min < i ? min : i;
+        }
+        return min;
     }
     private boolean isAllOne(ArrayList<Integer> list){
         for (int i:
@@ -116,15 +124,4 @@ public class Node {
         return true;
     }
 
-    public static int getNumOfSentMessages() {
-        return numOfSentMessages;
-    }
-
-    public static int getNumOfReceivedMessages() {
-        return numOfReceivedMessages;
-    }
-
-    public static int getNumOfLostMessages() {
-        return numOfLostMessages;
-    }
 }

@@ -12,17 +12,20 @@ public class Message {
         this.level = level;
         this.key = key;
     }
-    public void send(){
-        System.out.println(toString());
-
-    }
-
     public void setReceiverID(int receiverID) {
         this.receiverID = receiverID;
     }
-
     public void setSenderID(int senderID) {
         this.senderID = senderID;
+    }
+    public ArrayList<Integer> getVal() {
+        return val;
+    }
+    public int getKey() {
+        return key;
+    }
+    public ArrayList<Integer> getLevel() {
+        return level;
     }
 
     @Override
@@ -30,19 +33,6 @@ public class Message {
         return String.format("#sent from %d to %d: (%s ,%s ,%d)",
                 senderID, receiverID, getLevelString(),getValString(), key);
     }
-
-    public ArrayList<Integer> getVal() {
-        return val;
-    }
-
-    public int getKey() {
-        return key;
-    }
-
-    public ArrayList<Integer> getLevel() {
-        return level;
-    }
-
     public String getValString() {
         return getVectorString(val);
     }
